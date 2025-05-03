@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface SignupFormInputs {
-  first_name: string;
-  last_name: string;
+  First_name: string;
+  Last_name: string;
   email: string;
   password: string;
   re_password: string;
@@ -34,6 +34,8 @@ const Signup = () => {
         body: JSON.stringify(data),
       });
 
+      console.log(data)
+
       if (!response.ok) {
         throw new Error("Signup failed. Please try again.");
       }
@@ -42,26 +44,26 @@ const Signup = () => {
       reset();
       router.push("/login");
     } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.log(error)
-            toast.error(error?.message || "Signup failed! Please try again.");
-          } else {
-            toast.error("An unknown error occurred");
-          }
-        }
+      if (error instanceof Error) {
+        console.log(error)
+        toast.error(error?.message || "Signup failed! Please try again.");
+      } else {
+        toast.error("An unknown error occurred");
+      }
+    }
   };
 
   return (
-        <div className="flex items-center justify-center py-16">
+    <div className="flex items-center justify-center py-16">
       <div className="bg-white border border-[#81a7e3] rounded-lg p-8 w-full max-w-md">
         <div className="flex justify-center">
           <Link href="/">
-            <Image 
-              src="/logo2.png" 
-              alt="Sai Events" 
+            <Image
+              src="/logo2.png"
+              alt="Sai Events"
               height={500}
               width={500}
-              className="w-20 h-20" 
+              className="w-20 h-20"
             />
           </Link>
         </div>
@@ -73,35 +75,33 @@ const Signup = () => {
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col space-y-1">
-            <label htmlFor="first_name" className="text-[#004aad]/90">
+            <label htmlFor="First_name" className="text-[#004aad]/90">
               First name
             </label>
             <input
-              id="first_name"
+              id="First_name"
               type="text"
-              {...register("first_name", { required: "first_name is required" })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.first_name ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
-              }`}
+              {...register("First_name", { required: "first_name is required" })}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.First_name ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
+                }`}
               placeholder="Enter your first_name"
             />
-            {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name.message}</p>}
+            {errors.First_name && <p className="text-red-500 text-sm">{errors.First_name.message}</p>}
           </div>
 
           <div className="flex flex-col space-y-1">
-            <label htmlFor="last_name" className="text-[#004aad]/90">
+            <label htmlFor="Last_name" className="text-[#004aad]/90">
               Last name
             </label>
             <input
-              id="last_name"
+              id="Last_name"
               type="text"
-              {...register("last_name", { required: "last_name is required" })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.last_name ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
-              }`}
+              {...register("Last_name", { required: "last_name is required" })}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.Last_name ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
+                }`}
               placeholder="Enter your last_name"
             />
-            {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name.message}</p>}
+            {errors.Last_name && <p className="text-red-500 text-sm">{errors.Last_name.message}</p>}
           </div>
 
           <div className="flex flex-col space-y-1">
@@ -110,9 +110,8 @@ const Signup = () => {
               id="email"
               type="email"
               {...register("email", { required: "Email is required" })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.email ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
-              }`}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.email ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
+                }`}
               placeholder="Enter your email"
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
@@ -127,9 +126,8 @@ const Signup = () => {
                 required: "Password is required",
                 minLength: { value: 6, message: "Password must be at least 6 characters" },
               })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.password ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
-              }`}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.password ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
+                }`}
               placeholder="Enter your password"
             />
             {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
@@ -144,9 +142,8 @@ const Signup = () => {
                 required: "Please confirm your password",
                 validate: (value) => value === watch("password") || "Passwords do not match",
               })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.re_password ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
-              }`}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.re_password ? "border-red-500 focus:ring-red-500" : "border-[#004aad]/90 focus:ring-[#004aad]"
+                }`}
               placeholder="Confirm your password"
             />
             {errors.re_password && <p className="text-red-500 text-sm">{errors.re_password.message}</p>}
